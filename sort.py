@@ -1,5 +1,6 @@
 #! python3
 ###Script to get starttime and endtime difference.
+##Still quite messy & not portable as yet
 ###To do:
 # 1. Read contents of file skipping first row
 # 2. Convert into a list: Each row 
@@ -11,12 +12,14 @@
 
 import csv, datetime, ipaddress 
 
-#define function that returns 9th value
+#define function that returns 9th value - the int value of ip address (list of lists
 def sort_foo(x):
 	return x[8]
 
+#Read from file
+
 fileRows = []
-sessionFile = open('/home/joanna/Desktop/sessions_magpie/test.csv')
+sessionFile = open('/yourpath/file.csv')
 sessionReader = csv.reader(sessionFile)
 for row in sessionReader:
 	
@@ -57,7 +60,7 @@ resultRows = sorted(fileRows, key=sort_foo)
 #print(resultRows)
 
 #Write out new file
-outputFile = open('/home/joanna/Desktop/sessions_magpie/output.csv', 'w')
+outputFile = open('/yourpath/output.csv', 'w')
 outputWriter = csv.writer(outputFile, delimiter='\t', lineterminator='\n\n')
 outputWriter.writerow(header) #write the header
 for line in resultRows:
